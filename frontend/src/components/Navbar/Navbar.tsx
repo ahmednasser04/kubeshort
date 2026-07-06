@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import styles from './Navbar.module.css'
 
 function Navbar() {
@@ -11,9 +13,9 @@ function Navbar() {
         </div>
       </div>
 
-      <a className={styles.navLink} href="#shorten-url">
+      <Link className={styles.navLink} to="/">
         Shorten a URL
-      </a>
+      </Link>
     </header>
   )
 }

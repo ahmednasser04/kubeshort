@@ -1,14 +1,18 @@
-export type UrlStatus = 'Active' | 'Paused'
+export type UrlStatus = 'ACTIVE' | 'DELETED'
 
-export interface UrlStats {
-  id: string
+export interface ShortUrlRecord {
   clicks: number
-  shortCode: string
   createdAt: string
+  id: string
+  originalUrl: string
+  shortCode: string
+  shortUrl: string
   status: UrlStatus
+  updatedAt: string
 }
 
-export interface ShortUrlRecord extends UrlStats {
-  originalUrl: string
-  shortUrl: string
+export interface ShortUrlResponse {
+  data: ShortUrlRecord
+  message: string
+  success: boolean
 }
