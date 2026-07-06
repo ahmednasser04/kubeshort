@@ -1,0 +1,12 @@
+import type { RequestHandler } from 'express';
+
+export const healthCheck: RequestHandler = (_req, res) => {
+  res.status(200).json({
+    data: {
+      status: 'up',
+      timestamp: new Date().toISOString()
+    },
+    message: 'Service is healthy.',
+    success: true
+  });
+};
