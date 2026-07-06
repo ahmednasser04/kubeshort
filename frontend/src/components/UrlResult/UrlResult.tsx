@@ -66,6 +66,26 @@ function UrlResult({ record, onCopy }: UrlResultProps) {
             {copyLabel}
           </button>
         </div>
+
+        <div>
+          <p className={styles.fieldLabel}>Short Code</p>
+          <p className={styles.fieldValue}>{record.shortCode}</p>
+        </div>
+
+        <div>
+          <p className={styles.fieldLabel}>Click Count</p>
+          <p className={styles.fieldValue}>{record.clicks}</p>
+        </div>
+
+        <div>
+          <p className={styles.fieldLabel}>Status</p>
+          <p className={styles.fieldValue}>{record.status}</p>
+        </div>
+
+        <div>
+          <p className={styles.fieldLabel}>Created Date</p>
+          <p className={styles.fieldValue}>{new Date(record.createdAt).toLocaleString()}</p>
+        </div>
       </div>
     </section>
   )

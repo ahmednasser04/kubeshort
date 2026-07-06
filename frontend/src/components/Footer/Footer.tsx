@@ -10,15 +10,6 @@ function Footer() {
         </p>
       </div>
 
-      <div className={styles.links}>
-        <a href="https://github.com/" target="_blank" rel="noreferrer">
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
-          LinkedIn
-        </a>
-      </div>
-
       <p className={styles.legal}>© 2026 KubeShort. All rights reserved.</p>
     </footer>
   )

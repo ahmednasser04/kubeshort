@@ -1,7 +1,5 @@
-import type { ShortUrlRecord } from '../types/url'
-
-const SHORTENER_HOST = 'https://kubeshort.app'
-const SHORT_CODE_LENGTH = 7
+import { apiClient } from './api'
+import type { ShortUrlRecord, ShortUrlResponse } from '../types/url'
 
 function normalizeUrl(input: string) {
   const trimmed = input.trim()
@@ -13,21 +11,6 @@ function normalizeUrl(input: string) {
   return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
 }
 
-function createShortCode(length = SHORT_CODE_LENGTH) {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-  const randomValues = crypto.getRandomValues(new Uint8Array(length))
-
-  return Array.from(randomValues, (value) => alphabet[value % alphabet.length]).join('')
-}
-
-function createPlaceholderId() {
-  if (typeof crypto.randomUUID === 'function') {
-    return crypto.randomUUID()
-  }
-
-  return `uuid-${createShortCode(12)}`
-}
-
 export function isValidUrl(value: string) {
   try {
     new URL(normalizeUrl(value))
@@ -37,19 +20,17 @@ export function isValidUrl(value: string) {
   }
 }
 
-export async function shortenUrlMock(input: string): Promise<ShortUrlRecord> {
+export async function shortenUrl(input: string): Promise<ShortUrlRecord> {
   const originalUrl = normalizeUrl(input)
-  const shortCode = createShortCode()
-
-  await new Promise((resolve) => setTimeout(resolve, 800))
-
-  return {
-    id: createPlaceholderId(),
+  const response = await apiClient.post<ShortUrlResponse>('/api/v1/urls', {
     originalUrl,
-    shortCode,
-    shortUrl: `${SHORTENER_HOST}/${shortCode}`,
-    clicks: 0,
-    createdAt: 'Just now',
-    status: 'Active',
-  }
+  })
+
+  return response.data.data
+}
+
+export async function getUrlByShortCode(shortCode: string): Promise<ShortUrlRecord> {
+  const response = await apiClient.get<ShortUrlResponse>(`/api/v1/urls/${shortCode}`)
+
+  return response.data.data
 }
