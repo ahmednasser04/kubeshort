@@ -25,7 +25,7 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: false }));
 app.use('/health', healthRouter);
 app.use('/api/v1/urls', urlRouter);
-app.use('/', redirectRouter);
+app.use('/r', redirectRouter);
 app.use(notFound);
 app.use(errorHandler);
 

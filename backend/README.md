@@ -52,7 +52,7 @@ Copy `.env.example` to `.env` and set the values for your environment.
 
 - `PORT` - HTTP server port
 - `DATABASE_URL` - PostgreSQL connection string used by Prisma
-- `BASE_URL` - Public base URL used when building shortened links in responses
+- `BASE_URL` - Public base URL used when building shortened links in responses. The service appends `/r/<shortCode>` automatically.
 - `SHORT_CODE_LENGTH` - Length of generated short codes
 
 ## Running Locally

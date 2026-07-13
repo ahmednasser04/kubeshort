@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: kubeshort
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: ghcr.io/ahmednasser04/kubeshort-backend:latest
+        ports:
+        - containerPort: 3000
+
+        envFrom:
+        - configMapRef:
+            name: backend-config
+
+        - secretRef:
+            name: backend-secret
