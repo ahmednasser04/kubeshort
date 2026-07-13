@@ -51,3 +51,4 @@ Thumbs.db
 # =========================
 prisma/dev.db
 prisma/dev.db-journali
+k8s/backend/secret.yaml
