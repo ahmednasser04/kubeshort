@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ghcr.io/ahmednasser04/kubeshort-backend:latest
+        image: ghcr.io/ahmednasser04/kubeshort-backend:79e4bf969fe2986bce5fd34cb7eae31ea8cbb994
         ports:
         - containerPort: 3000
 
