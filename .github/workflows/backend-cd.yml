@@ -8,7 +8,7 @@ on:
       - 'backend/**'
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -41,3 +41,19 @@ jobs:
           tags: |
             ghcr.io/ahmednasser04/kubeshort-backend:latest
             ghcr.io/ahmednasser04/kubeshort-backend:${{ github.sha }}
+
+      - name: Update Kubernetes deployment manifest
+        run: |
+          sed -i "s|image: ghcr.io/ahmednasser04/kubeshort-backend:.*|image: ghcr.io/ahmednasser04/kubeshort-backend:${GITHUB_SHA}|" \
+            ../k8s/backend/deployment.yaml
+
+      - name: Commit and push manifest
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          cd ..
+
+          git add k8s/backend/deployment.yaml
+          git commit -m "ci: update backend image to ${GITHUB_SHA}" || exit 0
+          git push
