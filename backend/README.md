@@ -83,3 +83,4 @@ Build the image with:
 ```bash
 docker build -t kubeshort-url-service .
 ```
+## testing CI/CD
